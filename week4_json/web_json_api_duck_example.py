@@ -7,35 +7,29 @@ import requests
 import json
 
 # example url to query datamuse web json api
-example_url = "https://api.datamuse.com/words?ml=duck"
+example_url = "https://api.datamuse.com/words?ml=aggies"
 
-# variables to query alphavantage
-word = 'duck'
-key_word = "word"
-key_score = "score"
-search_word = "mallard"
+req = requests.get(example_url)
 
-#generate url
-url = 'https://api.datamuse.com/words?ml=' + word
-print(url)
+print(req.text)
 
-# requests stock data from data muse
-request = requests.get(url)
-# print(request.text) # print to double check data from web json api is good
-dct_full = json.loads(request.text)
+# data = req.json()
+data = json.loads(req.text)
+
+print(data)
+
+word_key = "word"
+score_key = "score"
+
+for dct in data:
+    print(dct)
+    if dct[word_key] == "usu":
+        print(dct[score_key])
 
 
 
-
-#####################################################################
-# programming activity
-# What is the score of the associated word: mallard
-# Steps: 
-# 1. load json into a dictionary
-# 2. search for word "mallard"
-# 3. print associated score value for mallard
-
-# answer below, try yourself before looking
+# amazing code which will find the word score for aggies and usu
+# go!
 
 
 
@@ -50,25 +44,3 @@ dct_full = json.loads(request.text)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# for dct_small in dct_full:
-#     # print(dct_small) # print all values to verify data is good
-#     if dct_small[key_word] == search_word:
-#         print("word: ", dct_small[key_word])
-#         print("value: ", dct_small[key_score])
-        

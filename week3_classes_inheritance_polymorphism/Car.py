@@ -10,33 +10,53 @@ class Car:
     def current_value(self, current_year):
         return self.original_price * (.90 ** (current_year - self.year))
         
-        
-andys_car = Car("Toyota", "Sequoia", 2001, 275000, 45000)
-
-print("andys_car value:", andys_car.current_value(2023))
-
-# AntiqueCar Class Example
+    def __str__(self):
+        return str(self.year) + " " + self.make + " " + self.model 
+    
 class AntiqueCar(Car):
     def current_value(self, current_year):
-        return self.original_price * (1.03 ** (current_year - self.year))
-        
-        
-gregs_car = AntiqueCar("Cadillac", "DeVille", 1976, 100000, 18000)
+        return self.original_price * (1.01 ** (current_year - self.year))
 
-print("gregs_car value: ", gregs_car.current_value(2023))
 
-#Polymorphism
 
-johnnys_car = Car("Ford", "F150", 2015, 55000, 45000)
-jennys_car = Car("Toyota", "Rav1", 2006, 125000, 20000)
+def main():
+    #instantiate class, and give a short example
 
-car_lot = [andys_car, johnnys_car, jennys_car, gregs_car]
 
+main()
+
+
+andys_car = Car("Toyota", "Sequoia", 2001, 305000, 40000)
+
+chris_car = Car("Honda", "Fit", 2009, 132000, 14000)
+
+alex_car = Car("Nissan", "Altima", 2017, 74000, 25000)
+
+marshall_car = Car("Saturn", "SW2", 1997, 290000, 12000)
+
+print(andys_car)
+
+print(andys_car.current_value(2025))
+
+andys_car_lot = [andys_car, chris_car, alex_car, marshall_car]
+
+# calculate total value of all cars
+value = 0.0
+for car in andys_car_lot:
+    value += car.current_value(2025)
+
+print("lot total value: ", value)
+
+andys_dream_car = AntiqueCar("Cadillac", "DeVille Convertible", 1978, 120000, 10000)
+
+mac_dream_car = AntiqueCar("Suzuki", "Carry", 2002, 100000, 8000)
+
+andys_car_lot.append(andys_dream_car)
+andys_car_lot.append(mac_dream_car)
+
+# calculate total value of all cars
 total_value = 0.0
+for car in andys_car_lot:
+    total_value += car.current_value(2025)
 
-for car in car_lot:
-    total_value += car.current_value(2023)
-    print(type(car))
-    
-print("all cars value: ", total_value)
-
+print("lot total value: ", total_value)

@@ -1,32 +1,26 @@
 '''
 This is an example of how to create a DeckOfCards object, shuffle it, and deal cards to play a game
 '''
+import numpy
+import matplotlib
+import requests
+import seaborn 
 
 from DeckOfCards import *
 
-deck = DeckOfCards()
-deck.print_deck()
-deck.shuffle_deck()
-deck.print_deck()
+
+import subprocess
+import sys
+
+# install('seaborn')
+
+# create a deck object 
+
+# create 2 players 
+
+# deal a card to each of the players 
+
+# determine which player is the winner, and display results to the screen
 
 
-# deal two cards to the user
-card = deck.get_card()
-card2 = deck.get_card()
 
-score = 0
-# calculate the user's hand score
-score += card.val
-score += card2.val
-print("Your score is: ", score)
-
-
-# ask user if they would like a "hit" (another card)
-hit = input("would you like a hit? ")
-
-if hit == 'y':
-    card3 = deck.get_card()
-    score += card3.val
-    print("new score: ", score)
-    
-    

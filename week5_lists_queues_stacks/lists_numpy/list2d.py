@@ -4,3 +4,4 @@ print("lst: ", lst)
 import numpy as np
 avgs = [np.mean(i) for i in lst]
 print("avgs: ", avgs, np.mean(avgs))
+

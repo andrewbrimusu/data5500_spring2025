@@ -19,6 +19,7 @@ class DeckOfCards():
         self.values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11]
         self.play_idx = 0
         
+        # create the deck
         for suit in self.suits:
             i = 0
             for i in range(len(self.faces)):

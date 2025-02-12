@@ -1,0 +1,1 @@
+# write a mean reversion stock market algorithm 

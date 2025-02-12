@@ -5,7 +5,6 @@ The urls require a specific date, and are generated using the datetime timedelta
 The data is written to a csv
 '''
 
-
 import requests
 import json
 import time
@@ -14,7 +13,7 @@ from datetime import datetime, timedelta
 
 
 # example url for coingecko.com
-example_url = "https://api.coingecko.com/api/v3/coins/ethereum/history?date=31-05-2022&localization=false"
+example_url = "https://api.coingecko.com/api/v3/coins/ethereum/history?date=04-02-2025"
 
 
 # url pieces, coin and date go in between  
@@ -22,64 +21,22 @@ url1 = "https://api.coingecko.com/api/v3/coins/"
 url2 = "/history?date="
 url3 = "&localization=false"
 
-# variables to pull coingecko data
-key_md = 'market_data'
-key_prc = 'current_price'
-key_usd = 'usd'
-
-# start date 2022-05-30  NOTE: integers do not start with 0 in Python like they often do in dates
-dt = datetime(2022, 5, 30)
-
-# example increasing the day by 1
-dt += timedelta(days=1)
-dt_s = dt.strftime("%d-%m-%Y") # string format required by coingecko
-    
+date = "04-02-2025"
 coin = "ethereum"
 
+url = url1 + coin + url2 + date + url3
+print(url)
 
-# example generating a url for a specific coin and date
-url = url1 + coin + url2 + dt_s + url3
-    
-#example requesting  data from coingecko
+# I need keys
+md_key = "market_data"
+current_key = "current_price"
+btc_key = "btc"
+
+# beautiful code
 req = requests.get(url)
-time.sleep(1) # sleep to avoid "too many requests" errors from coingecko
-d = json.loads(req.text)
+data = req.json()
 
-# printing the price
-print(dt_s, d[key_md][key_prc][key_usd])
+print(data[md_key][current_key][btc_key])
 
 
 
-
-#####################################################################
-# Running the program, for 365 days and saving to a csv file
-
-
-# create csv file for coin
-curr_dir = os.path.dirname(__file__) # get the current directory of this file
-
-file = open(curr_dir + "/" + coin + ".csv", "w")
-file.write("Date," + coin + "\n")
-
-# iterate through 365 days, request data, write prices to csv
-for i in range(365):
-    # increment day using a timedelta object
-    dt += timedelta(days=1)
-    dt_s = dt.strftime("%d-%m-%Y")
-    
-    # generate url for each day
-    url = url1 + coin + url2 + dt_s + url3
-    print("url: ", url)
-    
-    #request data from coingecko
-    req = requests.get(url)
-    time.sleep(1) # sleep to avoid "too many requests" errors from coingecko
-    d = json.loads(req.text)
-    
-    # write price to csv file, flush allows writing each time
-    print(dt_s, d[key_md][key_prc][key_usd])
-    file.write(dt_s + "," + str(d[key_md][key_prc][key_usd]) + "\n")
-    file.flush()
-
-# close file when done
-file.close()

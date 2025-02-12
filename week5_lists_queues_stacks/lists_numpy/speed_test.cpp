@@ -8,8 +8,8 @@ using namespace std;
 int main(int argc, char **argv) {
     
     clock_t begin = clock();
-    int r[1000000];
-    for (int i = 0; i < 1000000; ++i) {
+    short r[1000000];
+    for (short i = 0; i < 1000000; ++i) {
         r[i] = rand() % 1000 + 1;
     }
     clock_t end = clock();
